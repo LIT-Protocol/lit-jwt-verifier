@@ -1,0 +1,10 @@
+{
+  "name": "lit-jwt-verifier",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@noble/bls12-381": "^1.0.1",
+    "uint8arrays": "^3.0.0"
+  }
+}
