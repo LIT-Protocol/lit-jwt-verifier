@@ -4,7 +4,8 @@
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {
-    "build": "esbuild index.js --bundle --platform=node --outfile=dist/index.js"
+    "build": "esbuild index.js --bundle --platform=node --outfile=dist/index.js",
+    "start": "esbuild index.js --bundle --platform=node --outfile=dist/index.js --watch"
   },
   "dependencies": {
     "@noble/bls12-381": "^1.0.1",

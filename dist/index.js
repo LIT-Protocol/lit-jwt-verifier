@@ -2838,7 +2838,8 @@ function toString2(array, encoding = "utf8") {
 // index.js
 var import_bls12_381 = __toESM(require_bls12_381());
 var NETWORK_PUB_KEY = fromString2("9971e835a1fe1a4d78e381eebbe0ddc84fde5119169db816900de796d10187f3c53d65c1202ac083d099a517f34a9b62", "base16");
-async function verifyJwt(jwt) {
+async function verifyJwt({ jwt }) {
+  console.log("verifying jwt ", jwt);
   const jwtParts = jwt.split(".");
   const signature = fromString2(jwtParts[2], "base64url");
   const unsignedJwt = `${jwtParts[0]}.${jwtParts[1]}`;
@@ -2847,7 +2848,7 @@ async function verifyJwt(jwt) {
   const payload = JSON.parse(toString2(fromString2(jwtParts[1], "base64url")));
   let verified = false;
   if (header.alg === "BLS12-381" && header.typ === "JWT" && payload.iss === "LIT") {
-    verified = await (0, import_bls12_381.verify)(signature, unsignedJwt, NETWORK_PUB_KEY);
+    verified = await (0, import_bls12_381.verify)(signature, message, NETWORK_PUB_KEY);
   } else {
     console.log("Error verifying JWT.  Something is wrong with header.alg or header.typ or payload.iss.  header: ", header, "payload: ", payload);
   }

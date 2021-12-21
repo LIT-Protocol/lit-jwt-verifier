@@ -10,11 +10,13 @@ export const NETWORK_PUB_KEY = fromString(
 
 /**
  * Verify a JWT from the LIT network.  Use this for auth on your server.  For some background, users can define resources (URLs) for authorization via on-chain conditions using the saveSigningCondition function.  Other users can then request a signed JWT proving that their ETH account meets those on-chain conditions using the getSignedToken function.  Then, servers can verify that JWT using this function.  A successful verification proves that the user meets the on-chain conditions defined in the saveSigningCondition step.  For example, the on-chain condition could be posession of a specific NFT.
- * @param {string} jwt A JWT signed by the LIT network using the BLS12-381 algorithm
+ * @param {Object} params
+ * @param {string} params.jwt A JWT signed by the LIT network using the BLS12-381 algorithm
  * @returns {Object} An object with 4 keys: "verified": A boolean that represents whether or not the token verifies successfully.  A true result indicates that the token was successfully verified.  "header": the JWT header.  "payload": the JWT payload which includes the resource being authorized, etc.  "signature": A uint8array that represents the raw  signature of the JWT.
  */
-export async function verifyJwt(jwt) {
-  // console.log("pubkey is ", pubKey);
+export async function verifyJwt({ jwt }) {
+  console.log("verifying jwt ", jwt);
+
   const jwtParts = jwt.split(".");
   const signature = fromString(jwtParts[2], "base64url");
   // console.log("sig is ", uint8arrayToString(sig, "base16"));
@@ -31,7 +33,7 @@ export async function verifyJwt(jwt) {
     header.typ === "JWT" &&
     payload.iss === "LIT"
   ) {
-    verified = await verify(signature, unsignedJwt, NETWORK_PUB_KEY);
+    verified = await verify(signature, message, NETWORK_PUB_KEY);
   } else {
     console.log(
       "Error verifying JWT.  Something is wrong with header.alg or header.typ or payload.iss.  header: ",
