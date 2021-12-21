@@ -2,7 +2,6 @@ import { fromString } from "uint8arrays/from-string";
 import { toString } from "uint8arrays/to-string";
 
 import { verify } from "@noble/bls12-381";
-import { JWTContent } from "./models";
 
 export const NETWORK_PUB_KEY = fromString(
   "9971e835a1fe1a4d78e381eebbe0ddc84fde5119169db816900de796d10187f3c53d65c1202ac083d099a517f34a9b62",

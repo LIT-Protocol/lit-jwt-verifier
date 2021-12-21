@@ -1,10 +1,16 @@
 {
   "name": "lit-jwt-verifier",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "license": "MIT",
+  "scripts": {
+    "build": "esbuild index.js --bundle --platform=node --outfile=dist/index.js"
+  },
   "dependencies": {
     "@noble/bls12-381": "^1.0.1",
     "uint8arrays": "^3.0.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.14.6"
   }
 }
